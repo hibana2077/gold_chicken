@@ -32,6 +32,17 @@ services:
     networks:
       - gold_chicken_net
 
+  trader:
+    build:
+      context: .
+      dockerfile: ./trader/Dockerfile
+    ports:
+      - "8083:8083"
+    depends_on:
+      - db
+    networks:
+      - gold_chicken_net
+
   db:
     image: redis:latest
     ports:
