@@ -10,6 +10,10 @@ pages = {
     "Dashboard": [
         st.Page("./my_pages/dashboard.py", title="Dashboard", icon=":material/dashboard:"),
     ],
+    "Paper Trading": [
+        st.Page("./my_pages/paper_trading_dashboard.py", title="Paper Trading Dashboard", icon=":material/dashboard:"),
+        st.Page("./my_pages/paper_trading_history.py", title="Paper Trading History", icon=":material/history:"),
+    ],
     "Settings": [
         st.Page("./my_pages/user_settings.py", title="User Settings", icon=":material/settings_account_box:"),
         st.Page("./my_pages/trade_settings.py", title="Trade Settings", icon=":material/credit_card_gear:"),
