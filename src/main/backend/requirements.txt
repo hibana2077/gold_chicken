@@ -4,3 +4,4 @@ requests
 redis
 mango
 pandas_ta
+fastapi
