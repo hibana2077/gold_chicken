@@ -26,3 +26,5 @@ if not st.session_state.login:
                 st.rerun()
             else:
                 st.error("Login failed")
+
+st.write("Welcome to the home page")
