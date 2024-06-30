@@ -2,3 +2,5 @@ ccxt
 pandas
 requests
 redis
+mango
+pandas_ta
