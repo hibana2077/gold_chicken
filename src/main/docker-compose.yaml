@@ -4,7 +4,12 @@ services:
       context: .
       dockerfile: ./web/Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:8080" # In production, only this port can be accessed from outside
+    environment:
+      - DEFAULT_ADMIN_USER="admin"
+      - DEFAULT_ADMIN_PASSWORD="admin" # Change this in production
+      - API_HOST="backend"
+      - API_PORT="8081"
     depends_on:
       - backend
     networks:
@@ -16,6 +21,11 @@ services:
       dockerfile: ./backend/Dockerfile
     ports:
       - "8081:8081"
+    environment:
+      - API_HOST="0.0.0.0"
+      - API_PORT="8081"
+      - REDIS_HOST="db"
+      - REDIS_PORT="6379"
     depends_on:
       - db
     networks:
@@ -27,6 +37,8 @@ services:
       dockerfile: ./opt_server/Dockerfile
     ports:
       - "8082:8082"
+    volumes:
+      - ./strategies:/app/strategies
     depends_on:
       - db
     networks:
@@ -38,6 +50,8 @@ services:
       dockerfile: ./trader/Dockerfile
     ports:
       - "8083:8083"
+    volumes:
+      - ./strategies:/app/strategies
     depends_on:
       - db
     networks:
