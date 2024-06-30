@@ -9,12 +9,21 @@ REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT = os.getenv("REDIS_PORT", 6379)
 
 redis_counter_db = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=0) # Redis DB for counter
+redis_user_db = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=1) # Redis DB for user
 
 app = FastAPI()
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+@app.post("/login")
+def login(data: dict):
+    username = data.get("username")
+    password = data.get("password")
+    if redis_user_db.get(username) == password:
+        return {"status": "success"}
+    return {"status": "failed"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host=API_HOST, port=API_PORT)
