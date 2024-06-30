@@ -25,5 +25,15 @@ def login(data: dict):
         return {"status": "success"}
     return {"status": "failed"}
 
+@app.post("/change_password")
+def change_password(data: dict):
+    username = data.get("username")
+    old_password = data.get("old_password")
+    new_password = data.get("new_password")
+    if redis_user_db.get(username) == old_password:
+        redis_user_db.set(username, new_password)
+        return {"status": "success"}
+    return {"status": "failed"}
+
 if __name__ == "__main__":
     uvicorn.run(app, host=API_HOST, port=API_PORT)
