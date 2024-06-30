@@ -13,6 +13,8 @@ RUN /root/.cargo/bin/uv pip install --system --no-cache -r requirements.txt
 
 COPY . /app
 
-EXPOSE 8501
+RUN bash ./talib_setup.sh
 
-CMD ["streamlit", "run", "Home.py"]
+EXPOSE 8082
+
+CMD ["python3", "server.py"]

@@ -21,6 +21,17 @@ services:
     networks:
       - gold_chicken_net
 
+  opt_server:
+    build:
+      context: .
+      dockerfile: ./opt_server/Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - db
+    networks:
+      - gold_chicken_net
+
   db:
     image: redis:latest
     ports:

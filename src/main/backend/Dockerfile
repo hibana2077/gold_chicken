@@ -13,6 +13,6 @@ RUN /root/.cargo/bin/uv pip install --system --no-cache -r requirements.txt
 
 COPY . /app
 
-EXPOSE 8501
+EXPOSE 8081
 
-CMD ["streamlit", "run", "Home.py"]
+CMD ["python3", "server.py"]
